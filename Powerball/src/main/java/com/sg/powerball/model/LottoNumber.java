@@ -1,20 +1,31 @@
 
 package com.sg.powerball.model;
 
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 
-public class Number {
+public class LottoNumber {
     
+    private int id;
     private int num1;
     private int num2;
     private int num3;
     private int num4;
     private int num5;
     private int num6;
-    private LocalDate date;
+    private LocalDate drawingdate;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public int getNum1() {
         return num1;
     }
@@ -64,23 +75,26 @@ public class Number {
     }
 
     public LocalDate getDate() {
-        return date;
+        return drawingdate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDate(LocalDate drawingdate) {
+        this.drawingdate = drawingdate;
     }
+
+    
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 61 * hash + this.num1;
-        hash = 61 * hash + this.num2;
-        hash = 61 * hash + this.num3;
-        hash = 61 * hash + this.num4;
-        hash = 61 * hash + this.num5;
-        hash = 61 * hash + this.num6;
-        hash = 61 * hash + Objects.hashCode(this.date);
+        int hash = 5;
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + this.num1;
+        hash = 53 * hash + this.num2;
+        hash = 53 * hash + this.num3;
+        hash = 53 * hash + this.num4;
+        hash = 53 * hash + this.num5;
+        hash = 53 * hash + this.num6;
+        hash = 53 * hash + Objects.hashCode(this.drawingdate);
         return hash;
     }
 
@@ -95,7 +109,10 @@ public class Number {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Number other = (Number) obj;
+        final LottoNumber other = (LottoNumber) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (this.num1 != other.num1) {
             return false;
         }
@@ -114,10 +131,12 @@ public class Number {
         if (this.num6 != other.num6) {
             return false;
         }
-        if (!Objects.equals(this.date, other.date)) {
+        if (!Objects.equals(this.drawingdate, other.drawingdate)) {
             return false;
         }
         return true;
     }
+    
+    
 
 }

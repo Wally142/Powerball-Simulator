@@ -1,20 +1,81 @@
 package com.sg.powerball.model;
 
 import java.util.Objects;
-
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class Purchase {
-    
+
+    private int id;
+
+    @NotNull
+    @Size(min = 1, message = "First Name is required.")
+    @Size(max = 100, message = "Name is too long (100 characters max).")
     private String firstname;
+
+    @NotNull
+    @Size(min = 1, message = "Last Name is required.")
+    @Size(max = 100, message = "Name is too long (100 characters max).")
     private String lastname;
+
+    @NotNull
+    @Size(min = 1, message = "Email is required.")
+    @Size(max = 100, message = "Email is too long (100 characters max).")
     private String email;
+
+    @NotNull
+    @Size(min = 1, message = "State is required.")
+    @Size(max = 100, message = "State is too long (100 characters max).")
+
+    @NotNull
     private String state;
+
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
     private int num1;
+
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
     private int num2;
+
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
     private int num3;
+
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
     private int num4;
+
+   
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
     private int num5;
+
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(26)
     private int num6;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -98,17 +159,18 @@ public class Purchase {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.firstname);
-        hash = 29 * hash + Objects.hashCode(this.lastname);
-        hash = 29 * hash + Objects.hashCode(this.email);
-        hash = 29 * hash + Objects.hashCode(this.state);
-        hash = 29 * hash + this.num1;
-        hash = 29 * hash + this.num2;
-        hash = 29 * hash + this.num3;
-        hash = 29 * hash + this.num4;
-        hash = 29 * hash + this.num5;
-        hash = 29 * hash + this.num6;
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.firstname);
+        hash = 89 * hash + Objects.hashCode(this.lastname);
+        hash = 89 * hash + Objects.hashCode(this.email);
+        hash = 89 * hash + Objects.hashCode(this.state);
+        hash = 89 * hash + this.num1;
+        hash = 89 * hash + this.num2;
+        hash = 89 * hash + this.num3;
+        hash = 89 * hash + this.num4;
+        hash = 89 * hash + this.num5;
+        hash = 89 * hash + this.num6;
         return hash;
     }
 
@@ -124,6 +186,9 @@ public class Purchase {
             return false;
         }
         final Purchase other = (Purchase) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (this.num1 != other.num1) {
             return false;
         }
