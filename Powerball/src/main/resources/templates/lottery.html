@@ -9,20 +9,56 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>Most Recent Powerball Numbers</h1>
+        <h1 class="text-center">Let's Play The Powerball </h1>
 
-        <div th:if="${numbers}">
-            <ul th:object="${numbers}">
-                <li th:text="*{num1}">25</li>
-                <li th:text="*{num2}">15</li>
-                <li th:text="*{num3}">55</li>
-                <li th:text="*{num4}">44</li>
-                <li th:text="*{num5}">11</li>
-                <li th:text="*{num6}">60</li>
-                <li th:text="*{date}">2018-05-25</li>
-            </ul>
+        <div class="container">
+            <div class="row pick-header">
+                <div class="col-2">
+                    1st Number
+                </div>
+                <div class="col-2">
+                    2nd Number
+                </div>
+                <div class="col-2">
+                    3rd Number
+                </div>
+                <div class="col-2">
+                    4th Number
+                </div>
+                <div class="col-2">
+                    5th Number
+                </div>
+                <div class="col-2">
+                    Powerball
+                </div>
+            </div>
+
+            <div class="row picks" th:if="${numbers}" th:object="${numbers}">
+
+                <div class="col-2">
+                    <p th:text="*{num1}">25</p>
+                </div>
+                <div class="col-2">
+                    <p th:text="*{num2}">25</p>
+                </div>
+                <div class="col-2">
+                    <p th:text="*{num3}">25</p>
+                </div>
+                <div class="col-2">
+                    <p th:text="*{num4}">25</p>
+                </div>
+                <div class="col-2">
+                    <p th:text="*{num5}">25</p>
+                </div>
+                <div class="col-2">
+                    <p th:text="*{num6}">25</p>
+                </div>
+            </div>
         </div>
-
-        <a class="btn btn-primary" href="/">Home</a>
+        <div class="text-center">
+            <a class="btn btn-success" href="/lottery">Generate Numbers</a>
+            <a class="btn btn-primary" href="/">Home</a>
+        </div>
     </body>
 </html>
+

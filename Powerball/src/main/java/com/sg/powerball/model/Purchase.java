@@ -33,41 +33,45 @@ public class Purchase {
     @NotNull
     private String state;
 
-    
+    private boolean quickpick;
+
     @Digits(integer = 2, fraction = 0)
     @Min(1)
     @Max(69)
     private int num1;
 
-    
     @Digits(integer = 2, fraction = 0)
     @Min(1)
     @Max(69)
     private int num2;
 
-    
     @Digits(integer = 2, fraction = 0)
     @Min(1)
     @Max(69)
     private int num3;
 
-    
     @Digits(integer = 2, fraction = 0)
     @Min(1)
     @Max(69)
     private int num4;
 
-   
     @Digits(integer = 2, fraction = 0)
     @Min(1)
     @Max(69)
     private int num5;
 
-    
     @Digits(integer = 2, fraction = 0)
     @Min(1)
     @Max(26)
     private int num6;
+
+    public boolean isQuickpick() {
+        return quickpick;
+    }
+
+    public void setQuickpick(boolean quickpick) {
+        this.quickpick = quickpick;
+    }
 
     public int getId() {
         return id;
@@ -160,17 +164,18 @@ public class Purchase {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + this.id;
-        hash = 89 * hash + Objects.hashCode(this.firstname);
-        hash = 89 * hash + Objects.hashCode(this.lastname);
-        hash = 89 * hash + Objects.hashCode(this.email);
-        hash = 89 * hash + Objects.hashCode(this.state);
-        hash = 89 * hash + this.num1;
-        hash = 89 * hash + this.num2;
-        hash = 89 * hash + this.num3;
-        hash = 89 * hash + this.num4;
-        hash = 89 * hash + this.num5;
-        hash = 89 * hash + this.num6;
+        hash = 71 * hash + this.id;
+        hash = 71 * hash + Objects.hashCode(this.firstname);
+        hash = 71 * hash + Objects.hashCode(this.lastname);
+        hash = 71 * hash + Objects.hashCode(this.email);
+        hash = 71 * hash + Objects.hashCode(this.state);
+        hash = 71 * hash + (this.quickpick ? 1 : 0);
+        hash = 71 * hash + this.num1;
+        hash = 71 * hash + this.num2;
+        hash = 71 * hash + this.num3;
+        hash = 71 * hash + this.num4;
+        hash = 71 * hash + this.num5;
+        hash = 71 * hash + this.num6;
         return hash;
     }
 
@@ -187,6 +192,9 @@ public class Purchase {
         }
         final Purchase other = (Purchase) obj;
         if (this.id != other.id) {
+            return false;
+        }
+        if (this.quickpick != other.quickpick) {
             return false;
         }
         if (this.num1 != other.num1) {
@@ -221,5 +229,4 @@ public class Purchase {
         }
         return true;
     }
-
 }

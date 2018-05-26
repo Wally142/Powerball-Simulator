@@ -9,12 +9,12 @@ import java.util.Objects;
 public class LottoNumber {
     
     private int id;
-    private int num1;
-    private int num2;
-    private int num3;
-    private int num4;
-    private int num5;
-    private int num6;
+    private int num1 = 1;
+    private int num2 = 1;
+    private int num3 = 1;
+    private int num4 = 1;
+    private int num5 = 1;
+    private int num6 = 1;
     private LocalDate drawingdate;
 
     public int getId() {

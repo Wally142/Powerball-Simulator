@@ -22,31 +22,43 @@ public class LotteryController {
     @GetMapping("/lottery")
     public String lottery(Model model) {
 
-        LocalDate drawingdate = LocalDate.now();
-        LottoNumber numbers = lotteryService.getNumbers(drawingdate);
+//        LottoNumber test = new LottoNumber();
+//        LocalDate drawingdate = LocalDate.now();
+//        LottoNumber numbers = lotteryService.getNumbers(drawingdate);
+        LottoNumber numbers = lotteryService.generateNumbers();
 
         model.addAttribute("numbers", numbers);
+//        model.addAttribute("date", drawingdate);
 
         return "lottery";
     }
 
     @GetMapping("/purchase")
     public String purchase(Model model) {
+        LottoNumber test = new LottoNumber();
+        model.addAttribute("randomNum", test);
         model.addAttribute("purchase", new Purchase());
         return "purchase";
     }
 
     @PostMapping("/purchase")
-    public String buyTicket(@Valid Purchase purchase, BindingResult result, Model model) {
+    public String buyTicket(@Valid Purchase purchase, BindingResult result, Model model, String action) {
 
-        if (result.hasErrors()) {
-            model.addAttribute("purchase", purchase);
+        if (action.equals("quick")) {
+
+            LottoNumber num = lotteryService.generateNumbers();
+            model.addAttribute("randomNum", num);
             return "purchase";
-        } else {
+        } else if (action.equals("man")) {
 
-            lotteryService.saveTicket(purchase);
+            if (result.hasErrors()) {
+                model.addAttribute("purchase", purchase);
+                return "purchase";
+            } else {
+                System.out.println("quickpick " + purchase.isQuickpick());
+                lotteryService.saveTicket(purchase);
+            }
         }
-
         return "redirect:/";
     }
 

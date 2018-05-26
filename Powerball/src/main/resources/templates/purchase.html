@@ -124,37 +124,37 @@ and open the template in the editor.
                     </div>
                     <div class="row picks">
                         <div class="col-2">
-                            <input type="number" class="littleTxt" name="num1">
+                            <input type="number" class="littleTxt" name="num1" th:value="${randomNum.num1}">
                             <span class="text-danger"
                                   th:if="${#fields.hasErrors('purchase.num1')}"
                                   th:errors="*{purchase.num1}">Number Error</span>
                         </div>
                         <div class="col-2">
-                            <input type="number" class="littleTxt" name="num2">
+                            <input type="number" class="littleTxt" name="num2" th:value="${randomNum.num2}">
                             <span class="text-danger"
                                   th:if="${#fields.hasErrors('purchase.num2')}"
                                   th:errors="*{purchase.num2}">Number Error</span>
                         </div>
                         <div class="col-2">
-                            <input type="number" class="littleTxt" name="num3">
+                            <input type="number" class="littleTxt" name="num3" th:value="${randomNum.num3}">
                             <span class="text-danger"
-                                  th:if="${#fields.hasErrors('purchase.num3')}"
+                                  th:if="${#fields.hasErrors('purchase.num3')} "
                                   th:errors="*{purchase.num3}">Number Error</span>
                         </div>
                         <div class="col-2">
-                            <input type="number" class="littleTxt" name="num4">
+                            <input type="number" class="littleTxt" name="num4" th:value="${randomNum.num4}">
                             <span class="text-danger"
                                   th:if="${#fields.hasErrors('purchase.num4')}"
                                   th:errors="*{purchase.num4}">Number Error</span>
                         </div>
                         <div class="col-2">
-                            <input type="number" class="littleTxt" name="num5">
+                            <input type="number" class="littleTxt" name="num5" th:value="${randomNum.num5}">
                             <span class="text-danger"
                                   th:if="${#fields.hasErrors('purchase.num5')}"
                                   th:errors="*{purchase.num5}">Number Error</span>
                         </div>
                         <div class="col-2">
-                            <input type="number" class="littleTxt" name="num6">
+                            <input type="number" class="littleTxt" name="num6" th:value="${randomNum.num6}">
                             <span class="text-danger"
                                   th:if="${#fields.hasErrors('purchase.num6')}"
                                   th:errors="*{purchase.num6}">Number Error</span>
@@ -164,11 +164,11 @@ and open the template in the editor.
                 <div>
                     <br>
                     <br>
-                    <button type="button" class="btn btn-secondary">Generate Numbers</button>
+                    <button type="submit" name="action" value="quick" class="btn btn-secondary">Generate Numbers</button>
                     <br>
                     <br>
                     <div>
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button name="action" value="man" class="btn btn-primary" type="submit">Submit</button>
                     </div>
                     <br>
                     <div>
