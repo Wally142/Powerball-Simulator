@@ -4,17 +4,46 @@ package com.sg.powerball.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 
 public class LottoNumber {
     
     private int id;
-    private int num1 = 1;
-    private int num2 = 1;
-    private int num3 = 1;
-    private int num4 = 1;
-    private int num5 = 1;
-    private int num6 = 1;
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
+    private int num1 = 10;
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
+    private int num2 = 21;
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
+    private int num3 = 32;
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
+    private int num4 = 47;
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(69)
+    private int num5 = 7;
+    
+    @Digits(integer = 2, fraction = 0)
+    @Min(1)
+    @Max(26)
+    private int num6 = 16;
+    
+    
     private LocalDate drawingdate;
 
     public int getId() {

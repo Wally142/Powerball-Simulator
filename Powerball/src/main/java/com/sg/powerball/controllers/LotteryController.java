@@ -5,6 +5,7 @@ import com.sg.powerball.model.Purchase;
 import com.sg.powerball.service.LotteryService;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,20 +23,32 @@ public class LotteryController {
     @GetMapping("/lottery")
     public String lottery(Model model) {
 
-//        LottoNumber test = new LottoNumber();
-//        LocalDate drawingdate = LocalDate.now();
-//        LottoNumber numbers = lotteryService.getNumbers(drawingdate);
+        LocalDate drawingdate = LocalDate.now();
         LottoNumber numbers = lotteryService.generateNumbers();
 
         model.addAttribute("numbers", numbers);
-//        model.addAttribute("date", drawingdate);
+        model.addAttribute("date", drawingdate);
+
+        return "lottery";
+    }
+
+    @PostMapping("/lottery")
+    public String lotteryResults(LottoNumber num, Model model) {
+
+        LocalDate drawingdate = LocalDate.now();
+        LottoNumber numbers = lotteryService.storeNumbers(num, drawingdate);
+        List<Purchase> ticket = lotteryService.findWinners(num, drawingdate);
+
+        model.addAttribute("numbers", num);
+        model.addAttribute("result", ticket);
 
         return "lottery";
     }
 
     @GetMapping("/purchase")
     public String purchase(Model model) {
-        LottoNumber test = new LottoNumber();
+
+        LottoNumber test = lotteryService.generateNumbers();
         model.addAttribute("randomNum", test);
         model.addAttribute("purchase", new Purchase());
         return "purchase";
@@ -45,21 +58,29 @@ public class LotteryController {
     public String buyTicket(@Valid Purchase purchase, BindingResult result, Model model, String action) {
 
         if (action.equals("quick")) {
-
             LottoNumber num = lotteryService.generateNumbers();
             model.addAttribute("randomNum", num);
-            return "purchase";
-        } else if (action.equals("man")) {
 
             if (result.hasErrors()) {
                 model.addAttribute("purchase", purchase);
                 return "purchase";
             } else {
-                System.out.println("quickpick " + purchase.isQuickpick());
+                purchase.setQuickpick(true);
+                lotteryService.saveTicket(purchase);
+                return "purchase";
+            }
+        } else if (action.equals("man")) {
+
+            if (result.hasErrors()) {
+                LottoNumber test = new LottoNumber();
+                model.addAttribute("purchase", purchase);
+                model.addAttribute("randomNum", test);
+                return "purchase";
+            } else {
                 lotteryService.saveTicket(purchase);
             }
         }
-        return "redirect:/";
+        return "purchase";
     }
 
     @GetMapping("/search")
@@ -71,10 +92,8 @@ public class LotteryController {
     @PostMapping("/search")
     public String findLottoTicket(String lastname, String state, Model model) {
 
-        Purchase ticket = lotteryService.findTicket(lastname, state);
+        List<Purchase> ticket = lotteryService.findTicket(lastname, state);
         model.addAttribute("result", ticket);
-        System.out.println("Found Ticket: " + ticket.getLastname() + "" + ticket.getState());
-
         return "search";
     }
 

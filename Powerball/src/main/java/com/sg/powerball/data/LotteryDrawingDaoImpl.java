@@ -1,6 +1,7 @@
 package com.sg.powerball.data;
 
 import com.sg.powerball.model.LottoNumber;
+import com.sg.powerball.model.Purchase;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,22 +19,31 @@ public class LotteryDrawingDaoImpl implements LotteryDrawingDao {
     private JdbcTemplate jt;
 
     @Override
-    public LottoNumber getNumbers(LocalDate drawingdate) {
-        return jt.queryForObject(
-                "SELECT * FROM drawing where drawingdate = ?;",
-                new NumberMapper(), drawingdate);
-    }
+    public LottoNumber storeNumbers(LottoNumber num, LocalDate drawingdate) {
 
-    @Override
-    public LottoNumber storeNumbers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        num.setDate(drawingdate);
+        jt.update(
+                "INSERT INTO drawing (num1, num2, num3, num4, num5, num6, drawingdate) VALUES (?, ?, ?, ?, ?, ?, ?);",
+                num.getNum1(),
+                num.getNum2(),
+                num.getNum3(),
+                num.getNum4(),
+                num.getNum5(),
+                num.getNum6(),
+                num.getDate()
+        );
 
+        int id = jt.queryForObject("select LAST_INSERT_ID()", Integer.class);
+
+        num.setId(id);
+        return num;
     }
 
     private static final class NumberMapper implements RowMapper<LottoNumber> {
 
         @Override
         public LottoNumber mapRow(ResultSet rs, int i) throws SQLException {
+
             LottoNumber n = new LottoNumber();
             n.setId(rs.getInt("id"));
             n.setNum1(rs.getInt("num1"));

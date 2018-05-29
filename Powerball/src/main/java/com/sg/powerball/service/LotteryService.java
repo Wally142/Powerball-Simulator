@@ -26,37 +26,26 @@ public class LotteryService {
 
     public Purchase saveTicket(Purchase p) {
 
-        List<Integer> numList = new ArrayList<>();
-
-//        int one = p.getNum1();
-//        int two = p.getNum1();
-//        int three = p.getNum1();
-//        int four = p.getNum1();
-//        int five = p.getNum1();
-//        int six = p.getNum1();
-//
-//        numList.add(one);
-//        numList.add(two);
-//        numList.add(three);
-//        numList.add(four);
-//        numList.add(five);
-//        numList.add(six);
-        return purchase.customerPurchase(p);
+       return purchase.customerPurchase(p);
     }
 
-    public Purchase findTicket(String lastname, String state) {
+    public List<Purchase> findTicket(String lastname, String state) {
         return purchase.findTicket(lastname, state);
     }
+    
+    public List<Purchase> findWinners(LottoNumber num, LocalDate drawingdate) {
+        return purchase.getWinners(num, drawingdate);
+    }
 
-    public LottoNumber getNumbers(LocalDate drawingdate) {
-        return drawing.getNumbers(drawingdate);
+    public LottoNumber storeNumbers(LottoNumber num, LocalDate drawingdate) {
+        return drawing.storeNumbers(num, drawingdate);
     }
 
     public LottoNumber generateNumbers() {
         LottoNumber quickNum = new LottoNumber();
 
         int num6 = rdm.nextInt(26) + 1;
-        final int[] randomNums = new Random().ints(1, 69).distinct().limit(6).toArray();
+        final int[] randomNums = new Random().ints(1, 69).distinct().limit(6).toArray();// found these array methods to get numbers unique
 
         for (int i = 0; i < randomNums.length; i++) {
 

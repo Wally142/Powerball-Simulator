@@ -10,7 +10,11 @@
     </head>
     <body>
         <h1 class="text-center">Let's Play The Powerball </h1>
-
+        <br>
+        <div th:if="${date}">
+            <h5 class="text-center" th:text="*{date}"></h5>
+        </div>
+        <br>
         <div class="container">
             <div class="row pick-header">
                 <div class="col-2">
@@ -32,33 +36,51 @@
                     Powerball
                 </div>
             </div>
+            <form method="POST">
+                <div class="row picks" th:if="${numbers}" th:object="${numbers}">
 
-            <div class="row picks" th:if="${numbers}" th:object="${numbers}">
+                    <div class="col-2">
+                        <input name="num1" th:value="*{num1}">
+                    </div>
+                    <div class="col-2">
+                        <input name="num2" th:value="*{num2}">
+                    </div>
+                    <div class="col-2">
+                        <input name="num3" th:value="*{num3}">
+                    </div>
+                    <div class="col-2">
+                        <input name="num4" th:value="*{num4}">
+                    </div>
+                    <div class="col-2">
+                        <input name="num5" th:value="*{num5}">
+                    </div>
+                    <div class="col-2">
+                        <input name="num6" th:value="*{num6}">
+                    </div>
+                </div>
+                <br>
+                <div class="text-center">
+                    <button class="btn btn-success" type="submit">Show Results</button>
+                    <a class="btn btn-primary" href="/">Home</a>
+                </div>
+            </form>
+            
+            <div th:if="${result}">
+            <ul th:each="r: ${result}">
+                <li th:text="*{r.firstname}">First</li>
+                <li th:text="*{r.lastname}">Last</li>
+                <li th:text="*{r.email}">Email</li>
+                <li th:text="*{r.state}">State</li>
+                <li th:text="*{r.num1}">25</li>
+                <li th:text="*{r.num2}">15</li>
+                <li th:text="*{r.num3}">55</li>
+                <li th:text="*{r.num4}">44</li>
+                <li th:text="*{r.num5}">11</li>
+                <li th:text="*{r.num6}">60</li>
+            </ul>
+        </div>
+        </div>
 
-                <div class="col-2">
-                    <p th:text="*{num1}">25</p>
-                </div>
-                <div class="col-2">
-                    <p th:text="*{num2}">25</p>
-                </div>
-                <div class="col-2">
-                    <p th:text="*{num3}">25</p>
-                </div>
-                <div class="col-2">
-                    <p th:text="*{num4}">25</p>
-                </div>
-                <div class="col-2">
-                    <p th:text="*{num5}">25</p>
-                </div>
-                <div class="col-2">
-                    <p th:text="*{num6}">25</p>
-                </div>
-            </div>
-        </div>
-        <div class="text-center">
-            <a class="btn btn-success" href="/lottery">Generate Numbers</a>
-            <a class="btn btn-primary" href="/">Home</a>
-        </div>
     </body>
 </html>
 

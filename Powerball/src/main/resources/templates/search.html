@@ -80,17 +80,21 @@
                 <button class="btn btn-primary" type="submit">Submit</button>
         </form>
         <div th:if="${result}">
-            <ul th:object="${result}">
-                <li th:text="*{firstname}">First</li>
-                <li th:text="*{lastname}">Last</li>
-                <li th:text="*{email}">Email</li>
-                <li th:text="*{state}">State</li>
-                <li th:text="*{num1}">25</li>
-                <li th:text="*{num2}">15</li>
-                <li th:text="*{num3}">55</li>
-                <li th:text="*{num4}">44</li>
-                <li th:text="*{num5}">11</li>
-                <li th:text="*{num6}">60</li>
+            <ul th:each="r: ${result}">
+                <li th:text="*{r.firstname}">First</li>
+                <li th:text="*{r.lastname}">Last</li>
+                <li th:text="*{r.email}">Email</li>
+                <li th:text="*{r.state}">State</li>
+                <li th:text="*{r.num1}">25</li>
+                <li th:text="*{r.num2}">15</li>
+                <li th:text="*{r.num3}">55</li>
+                <li th:text="*{r.num4}">44</li>
+                <li th:text="*{r.num5}">11</li>
+                <li th:text="*{r.num6}">60</li>
+                <span>Quick Pick: </span>
+                <li th:text="*{r.quickpick}">60</li>
+                <span>Ticket Status: </span>
+                <li th:text="*{r.ticketstatus}">60</li>
             </ul>
         </div>
     </div>
